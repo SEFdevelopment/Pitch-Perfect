@@ -37,6 +37,7 @@
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <animations/>
                                 <state key="normal" image="stopbutton"/>
+                                <state key="highlighted" image="stopbuttonhighlighted"/>
                                 <connections>
                                     <action selector="stopAudio:" destination="uJT-QF-mgD" eventType="touchUpInside" id="epH-2q-jyV"/>
                                 </connections>
@@ -113,6 +114,7 @@
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <animations/>
                                 <state key="normal" image="slowbutton"/>
+                                <state key="highlighted" image="slowbuttonhighlighted"/>
                                 <connections>
                                     <action selector="playSlowAudio:" destination="k10-MH-E8N" eventType="touchUpInside" id="IuO-v4-ULe"/>
                                 </connections>
@@ -121,6 +123,7 @@
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <animations/>
                                 <state key="normal" image="fastbutton"/>
+                                <state key="highlighted" image="fastbuttonhighlighted"/>
                                 <connections>
                                     <action selector="playFastAudio:" destination="k10-MH-E8N" eventType="touchUpInside" id="hDj-WE-tWU"/>
                                 </connections>
@@ -129,6 +132,7 @@
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <animations/>
                                 <state key="normal" image="stopbutton"/>
+                                <state key="highlighted" image="stopbuttonhighlighted"/>
                                 <connections>
                                     <action selector="stopAudio:" destination="k10-MH-E8N" eventType="touchUpInside" id="gs2-DD-iCM"/>
                                 </connections>
@@ -137,6 +141,7 @@
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <animations/>
                                 <state key="normal" image="chipmunkbutton"/>
+                                <state key="highlighted" image="chipmunkbuttonhighlighted"/>
                                 <connections>
                                     <action selector="playChipmunkAudio:" destination="k10-MH-E8N" eventType="touchUpInside" id="2h8-3P-0ic"/>
                                 </connections>
@@ -145,6 +150,7 @@
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <animations/>
                                 <state key="normal" image="darthvaderbutton"/>
+                                <state key="highlighted" image="darthvaderbuttonhighlighted"/>
                                 <connections>
                                     <action selector="playDarthvaderAudio:" destination="k10-MH-E8N" eventType="touchUpInside" id="d4K-BD-nzv"/>
                                 </connections>
@@ -234,10 +240,15 @@
     </scenes>
     <resources>
         <image name="chipmunkbutton" width="100" height="100"/>
+        <image name="chipmunkbuttonhighlighted" width="100" height="100"/>
         <image name="darthvaderbutton" width="100" height="100"/>
+        <image name="darthvaderbuttonhighlighted" width="100" height="100"/>
         <image name="fastbutton" width="100" height="100"/>
+        <image name="fastbuttonhighlighted" width="100" height="100"/>
         <image name="microphone" width="100" height="100"/>
         <image name="slowbutton" width="100" height="100"/>
+        <image name="slowbuttonhighlighted" width="100" height="100"/>
         <image name="stopbutton" width="50" height="50"/>
+        <image name="stopbuttonhighlighted" width="50" height="50"/>
     </resources>
 </document>
