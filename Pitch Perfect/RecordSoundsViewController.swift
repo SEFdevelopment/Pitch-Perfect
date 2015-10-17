@@ -11,17 +11,32 @@ import AVFoundation
 
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
+    // MARK: - TYPES
+    enum RecordingState {
+        
+        case Stopped
+        case InProgress
+        case Paused
+        
+    }
+    
     // MARK: - PROPERTIES
     
     // MARK: - @IBOutlets
+    @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var recordingInProgress: UILabel!
     @IBOutlet weak var stopButton: UIButton!
-    @IBOutlet weak var recordButton: UIButton!
+
     
     // MARK: - Audio recording
     var audioRecorder: AVAudioRecorder!
     var recordedAudio: RecordedAudio!
+    var recordingState: RecordingState = .Stopped
     
+    
+    // MARK: - Microphone button images
+    let microphoneImage = UIImage(named: "microphone")
+    let microphonePauseImage = UIImage(named: "microphonepause")
     
     
     // MARK: - METHODS
@@ -30,19 +45,27 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Configure buttons
-        stopButton.hidden = true
-        recordButton.enabled = true
+        configureUIForRecordingState(.Stopped)
+        
     }
     
     
     // MARK: - @IBActions
     @IBAction func recordAudio(sender: UIButton) {
         
-        // Configure buttons
-        stopButton.hidden = false
-        recordingInProgress.text = "Recording..."
-        recordButton.enabled = false
+        // Configure UI
+        if recordingState == .InProgress {
+            
+            recordingState = .Paused
+            configureUIForRecordingState(recordingState)
+            
+        } else {
+            
+            recordingState = .InProgress
+            configureUIForRecordingState(recordingState)
+            
+        }
+        
         
         // Get the path to the audio file
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
@@ -67,8 +90,9 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBAction func stopAudio(sender: UIButton) {
         
-        // Configure labels
-        recordingInProgress.text = "Tap to Record"
+        // Configure UI
+        recordingState = .Stopped
+        configureUIForRecordingState(recordingState)
         
         // Stop recorder
         audioRecorder.stop()
@@ -77,6 +101,38 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
     }
+    
+    
+    // MARK: - Configure UI
+    func configureUIForRecordingState(recordingState: RecordingState) {
+        
+        switch recordingState {
+            
+        case .Stopped:
+            
+            recordButton.setImage(microphoneImage, forState: .Normal)
+            recordingInProgress.text = "Tap to start recording"
+            stopButton.hidden = true
+            
+        case .InProgress:
+            
+            recordButton.setImage(microphonePauseImage, forState: .Normal)
+            recordingInProgress.text = "Recording..."
+            stopButton.hidden = false
+            
+        case .Paused:
+            
+            recordButton.setImage(microphoneImage, forState: .Normal)
+            recordingInProgress.text = "Tap to resume recording"
+            stopButton.hidden = false
+            
+        }
+        
+        
+    }
+    
+    
+    
     
     // MARK: - AVAudioRecorderDelegate methods
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
