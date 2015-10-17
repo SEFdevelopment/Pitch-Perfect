@@ -42,6 +42,26 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     // MARK: - METHODS
     
     // MARK: - View controller life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Set the audio session
+        let session = AVAudioSession.sharedInstance()
+        try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        
+        // File path to the audio file
+        let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let recordingName = "my_audio.wav"
+        let pathArray = [dirPath, recordingName]
+        let filePath = NSURL.fileURLWithPathComponents(pathArray)
+        
+        // Initialize the recorder
+        try! audioRecorder = AVAudioRecorder(URL: filePath!, settings: [:])
+        audioRecorder.delegate = self
+        audioRecorder.prepareToRecord()
+        
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -53,37 +73,30 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     // MARK: - @IBActions
     @IBAction func recordAudio(sender: UIButton) {
         
-        // Configure UI
-        if recordingState == .InProgress {
+        switch recordingState {
             
-            recordingState = .Paused
-            configureUIForRecordingState(recordingState)
-            
-        } else {
+        case .Stopped:
             
             recordingState = .InProgress
             configureUIForRecordingState(recordingState)
             
+            audioRecorder.record()
+            
+        case .InProgress:
+            
+            recordingState = .Paused
+            configureUIForRecordingState(recordingState)
+            
+            audioRecorder.pause()
+            
+        case .Paused:
+            
+            recordingState = .InProgress
+            configureUIForRecordingState(recordingState)
+            
+            audioRecorder.record()
+            
         }
-        
-        
-        // Get the path to the audio file
-        let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let recordingName = "my_audio.wav"
-        let pathArray = [dirPath, recordingName]
-        let filePath = NSURL.fileURLWithPathComponents(pathArray)
-
-        // Set the audio session
-        let session = AVAudioSession.sharedInstance()
-        try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
-        
-        // Initialize the recorder and start recording
-        try! audioRecorder = AVAudioRecorder(URL: filePath!, settings: [:])
-        audioRecorder.delegate = self
-        audioRecorder.meteringEnabled = true
-        audioRecorder.prepareToRecord()
-        audioRecorder.record()
-        
         
     }
     
