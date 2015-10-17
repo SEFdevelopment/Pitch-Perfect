@@ -84,10 +84,10 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         if flag {
             
             // Save the recorded audio
-            recordedAudio = RecordedAudio()
-            recordedAudio.filePathUrl = recorder.url
-            recordedAudio.title = recorder.url.lastPathComponent
-            
+            let filePathUrl = recorder.url
+            let title = recorder.url.lastPathComponent
+            recordedAudio = RecordedAudio(filePathUrl: filePathUrl, title: title)
+
             // Perform segue
             performSegueWithIdentifier("stopRecording", sender: recordedAudio)
             
