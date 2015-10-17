@@ -41,7 +41,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         
         // Configure buttons
         stopButton.hidden = false
-        recordingInProgress.hidden = false
+        recordingInProgress.text = "Recording..."
         recordButton.enabled = false
         
         // Get the path to the audio file
@@ -68,7 +68,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBAction func stopAudio(sender: UIButton) {
         
         // Configure labels
-        recordingInProgress.hidden = true
+        recordingInProgress.text = "Tap to Record"
         
         // Stop recorder
         audioRecorder.stop()
@@ -78,7 +78,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         try! audioSession.setActive(false)
     }
     
-    
+    // MARK: - AVAudioRecorderDelegate methods
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
         
         if flag {
