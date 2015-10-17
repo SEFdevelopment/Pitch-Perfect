@@ -11,27 +11,22 @@ import AVFoundation
 
 class PlaySoundsViewController: UIViewController {
     
-    var audioPlayer: AVAudioPlayer!
-    var receivedAudio: RecordedAudio!
+    // MARK: - PROPERTIES
     
-    var audioEngine: AVAudioEngine!
+    // MARK: - Audio saving
+    var receivedAudio: RecordedAudio!
     var audioFile: AVAudioFile!
     
+    // MARK: - Audio engine
+    var audioEngine: AVAudioEngine!
+    var audioPlayer: AVAudioPlayer!
+    
+    
+    // MARK: - METHODS
+    
+    // MARK: - View controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        //        if let filePath = NSBundle.mainBundle().pathForResource("movie_quote", ofType: "mp3") {
-        //
-        //            let filePathUrl = NSURL.fileURLWithPath(filePath)
-        //
-        //
-        //
-        //        } else {
-        //
-        //            print("the filePath is empty")
-        //
-        //        }
         
         audioPlayer = try! AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl)
         audioPlayer.enableRate = true
@@ -41,11 +36,8 @@ class PlaySoundsViewController: UIViewController {
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
+    // MARK: - @IBActions
     @IBAction func playSlowAudio(sender: UIButton) {
         
         playAudioWithVariableRate(0.5)
@@ -71,7 +63,13 @@ class PlaySoundsViewController: UIViewController {
     }
     
     
+    @IBAction func stopAudio(sender: UIButton) {
+        
+        audioPlayer.stop()
+    }
     
+    
+    // MARK: - Sound effects
     func playAudioWithVariablePitch(pitch: Float) {
         
         audioPlayer.stop()
@@ -104,22 +102,6 @@ class PlaySoundsViewController: UIViewController {
         audioPlayer.play()
         
     }
-    
-    @IBAction func stopAudio(sender: UIButton) {
-        
-        audioPlayer.stop()
-    }
-    
-    
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
+
     
 }
