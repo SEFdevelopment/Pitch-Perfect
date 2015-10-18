@@ -110,9 +110,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         // Stop recorder
         audioRecorder.stop()
         
-        // Set the audio session
-        let audioSession = AVAudioSession.sharedInstance()
-        try! audioSession.setActive(false)
+
     }
     
     
