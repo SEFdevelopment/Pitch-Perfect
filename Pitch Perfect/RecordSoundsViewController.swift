@@ -143,8 +143,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     
-    
-    
     // MARK: - AVAudioRecorderDelegate methods
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
         
@@ -166,6 +164,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         }
         
     }
+    
     
     // MARK: - Storyboard segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
