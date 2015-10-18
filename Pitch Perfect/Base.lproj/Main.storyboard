@@ -282,8 +282,8 @@
         <image name="fastbutton" width="100" height="100"/>
         <image name="fastbuttonhighlighted" width="100" height="100"/>
         <image name="microphone" width="100" height="100"/>
-        <image name="reverbbutton" width="100" height="100"/>
-        <image name="reverbbuttonhighlighted" width="100" height="100"/>
+        <image name="reverbbutton" width="80" height="80"/>
+        <image name="reverbbuttonhighlighted" width="80" height="80"/>
         <image name="slowbutton" width="100" height="100"/>
         <image name="slowbuttonhighlighted" width="100" height="100"/>
         <image name="stopbutton" width="50" height="50"/>
