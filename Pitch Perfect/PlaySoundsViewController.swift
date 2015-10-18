@@ -52,13 +52,47 @@ class PlaySoundsViewController: UIViewController {
     
     @IBAction func playChipmunkAudio(sender: UIButton) {
         
-        playAudioWithVariablePitch(1000)
+        stopAndResetAudio()
+        
+        let chipmunkEffect = AVAudioUnitTimePitch()
+        chipmunkEffect.pitch = 1000
+        
+        playAudioWithEffect(chipmunkEffect)
         
     }
     
     @IBAction func playDarthvaderAudio(sender: UIButton) {
         
-        playAudioWithVariablePitch(-1000)
+        stopAndResetAudio()
+        
+        let darthvaderEffect = AVAudioUnitTimePitch()
+        darthvaderEffect.pitch = -1000
+        
+        playAudioWithEffect(darthvaderEffect)
+        
+    }
+    
+    @IBAction func playEchoAudio(sender: UIButton) {
+        
+        stopAndResetAudio()
+        
+        let echoEffect = AVAudioUnitDelay()
+        echoEffect.delayTime = NSTimeInterval(2.0)
+        
+        playAudioWithEffect(echoEffect)
+        
+    }
+    
+    
+    @IBAction func playReverbAudio(sender: UIButton) {
+        
+        stopAndResetAudio()
+        
+        let reverbEffect = AVAudioUnitReverb()
+        reverbEffect.loadFactoryPreset(.Cathedral)
+        reverbEffect.wetDryMix = 50
+        
+        playAudioWithEffect(reverbEffect)
         
     }
     
@@ -70,21 +104,29 @@ class PlaySoundsViewController: UIViewController {
     
     
     // MARK: - Sound effects
-    func playAudioWithVariablePitch(pitch: Float) {
+    
+    // Fast and slow audio 
+    // This can be achieved also by using the AVAudioUnit effects. I left it like it is in the Udacity videos.
+    func playAudioWithVariableRate(rate: Float) {
         
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
+        stopAndResetAudio()
+        
+        audioPlayer.rate = rate
+        audioPlayer.currentTime = 0.0
+        audioPlayer.play()
+        
+    }
+    
+    // AVAudioUnit effects
+    func playAudioWithEffect(effect: AVAudioNode) {
         
         let audioPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(audioPlayerNode)
         
-        let changePitchEffect = AVAudioUnitTimePitch()
-        changePitchEffect.pitch = pitch
-        audioEngine.attachNode(changePitchEffect)
+        audioEngine.attachNode(effect)
         
-        audioEngine.connect(audioPlayerNode, to: changePitchEffect, format: nil)
-        audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
+        audioEngine.connect(audioPlayerNode, to: effect, format: nil)
+        audioEngine.connect(effect, to: audioEngine.outputNode, format: nil)
         
         audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
         try! audioEngine.start()
@@ -94,15 +136,12 @@ class PlaySoundsViewController: UIViewController {
     }
     
     
-    func playAudioWithVariableRate(rate: Float) {
+    // MARK: - Audio engine stop and reset
+    func stopAndResetAudio() {
         
         audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()
-        
-        audioPlayer.rate = rate
-        audioPlayer.currentTime = 0.0
-        audioPlayer.play()
         
     }
 

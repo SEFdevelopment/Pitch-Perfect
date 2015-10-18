@@ -151,12 +151,18 @@
                                 <animations/>
                                 <state key="normal" image="echobutton"/>
                                 <state key="highlighted" image="echobuttonhighlighted"/>
+                                <connections>
+                                    <action selector="playEchoAudio:" destination="k10-MH-E8N" eventType="touchUpInside" id="Vca-0N-h3E"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fpN-RJ-G2m">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <animations/>
                                 <state key="normal" image="reverbbutton"/>
                                 <state key="highlighted" image="reverbbuttonhighlighted"/>
+                                <connections>
+                                    <action selector="playReverbAudio:" destination="k10-MH-E8N" eventType="touchUpInside" id="Xu5-Iu-08B"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gtQ-QM-eeC">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -197,20 +203,20 @@
                                 <exclude reference="gtQ-QM-eeC"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="UWQ-Ze-uZR"/>
-                                <exclude reference="iip-SO-eeA"/>
-                                <exclude reference="8RK-wS-wlm"/>
-                                <exclude reference="Yuh-rr-skV"/>
-                                <exclude reference="Zmx-J9-eXH"/>
-                                <exclude reference="oD2-Hc-hgF"/>
+                                <exclude reference="Qky-xZ-sWH"/>
                                 <exclude reference="cXc-zS-Lig"/>
                                 <exclude reference="oOH-De-KM3"/>
+                                <exclude reference="XIL-4J-Ao2"/>
+                                <exclude reference="Zmx-J9-eXH"/>
+                                <exclude reference="oD2-Hc-hgF"/>
+                                <exclude reference="UWQ-Ze-uZR"/>
+                                <exclude reference="iip-SO-eeA"/>
                                 <exclude reference="Ha9-JK-rDD"/>
                                 <exclude reference="eHr-VX-G5h"/>
                                 <exclude reference="cS5-K3-hwq"/>
                                 <exclude reference="xHG-5g-ofH"/>
-                                <exclude reference="XIL-4J-Ao2"/>
-                                <exclude reference="Qky-xZ-sWH"/>
+                                <exclude reference="8RK-wS-wlm"/>
+                                <exclude reference="Yuh-rr-skV"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -224,20 +230,20 @@
                                 <include reference="gtQ-QM-eeC"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="UWQ-Ze-uZR"/>
-                                <include reference="iip-SO-eeA"/>
-                                <include reference="8RK-wS-wlm"/>
-                                <include reference="Yuh-rr-skV"/>
-                                <include reference="Zmx-J9-eXH"/>
-                                <include reference="oD2-Hc-hgF"/>
+                                <include reference="Qky-xZ-sWH"/>
                                 <include reference="cXc-zS-Lig"/>
                                 <include reference="oOH-De-KM3"/>
+                                <include reference="XIL-4J-Ao2"/>
+                                <include reference="Zmx-J9-eXH"/>
+                                <include reference="oD2-Hc-hgF"/>
+                                <include reference="UWQ-Ze-uZR"/>
+                                <include reference="iip-SO-eeA"/>
                                 <include reference="Ha9-JK-rDD"/>
                                 <include reference="eHr-VX-G5h"/>
                                 <include reference="cS5-K3-hwq"/>
                                 <include reference="xHG-5g-ofH"/>
-                                <include reference="XIL-4J-Ao2"/>
-                                <include reference="Qky-xZ-sWH"/>
+                                <include reference="8RK-wS-wlm"/>
+                                <include reference="Yuh-rr-skV"/>
                             </mask>
                         </variation>
                     </view>
