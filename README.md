@@ -12,3 +12,4 @@ An app that records a message and plays the audio back through user-selected fil
 ## Adopted Cocoa design patterns
 * MVC
 * Delegation
+* Target-Action
