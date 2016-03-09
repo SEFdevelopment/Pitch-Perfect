@@ -10,6 +10,7 @@ An app that records a message and plays the audio back through user-selected fil
 
 ## iOS frameworks and technologies used
 * UIKit
+* Auto Layout
 * Foundation
 * AVFoundation (AVAudioEngine)
 
