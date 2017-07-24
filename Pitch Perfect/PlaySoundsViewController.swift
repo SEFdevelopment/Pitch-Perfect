@@ -28,29 +28,29 @@ class PlaySoundsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        audioPlayer = try! AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl)
+        audioPlayer = try! AVAudioPlayer(contentsOf: receivedAudio.filePathUrl as URL)
         audioPlayer.enableRate = true
         
         audioEngine = AVAudioEngine()
-        try! audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl)
+        try! audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl as URL)
         
     }
     
 
     // MARK: - @IBActions
-    @IBAction func playSlowAudio(sender: UIButton) {
+    @IBAction func playSlowAudio(_ sender: UIButton) {
         
         playAudioWithVariableRate(0.5)
     }
     
     
-    @IBAction func playFastAudio(sender: UIButton) {
+    @IBAction func playFastAudio(_ sender: UIButton) {
         
         playAudioWithVariableRate(1.5)
         
     }
     
-    @IBAction func playChipmunkAudio(sender: UIButton) {
+    @IBAction func playChipmunkAudio(_ sender: UIButton) {
         
         stopAndResetAudio()
         
@@ -61,7 +61,7 @@ class PlaySoundsViewController: UIViewController {
         
     }
     
-    @IBAction func playDarthvaderAudio(sender: UIButton) {
+    @IBAction func playDarthvaderAudio(_ sender: UIButton) {
         
         stopAndResetAudio()
         
@@ -72,24 +72,24 @@ class PlaySoundsViewController: UIViewController {
         
     }
     
-    @IBAction func playEchoAudio(sender: UIButton) {
+    @IBAction func playEchoAudio(_ sender: UIButton) {
         
         stopAndResetAudio()
         
         let echoEffect = AVAudioUnitDelay()
-        echoEffect.delayTime = NSTimeInterval(2.0)
+        echoEffect.delayTime = TimeInterval(2.0)
         
         playAudioWithEffect(echoEffect)
         
     }
     
     
-    @IBAction func playReverbAudio(sender: UIButton) {
+    @IBAction func playReverbAudio(_ sender: UIButton) {
         
         stopAndResetAudio()
         
         let reverbEffect = AVAudioUnitReverb()
-        reverbEffect.loadFactoryPreset(.Cathedral)
+        reverbEffect.loadFactoryPreset(.cathedral)
         reverbEffect.wetDryMix = 50
         
         playAudioWithEffect(reverbEffect)
@@ -97,7 +97,7 @@ class PlaySoundsViewController: UIViewController {
     }
     
     
-    @IBAction func stopAudio(sender: UIButton) {
+    @IBAction func stopAudio(_ sender: UIButton) {
         
         audioPlayer.stop()
     }
@@ -107,7 +107,7 @@ class PlaySoundsViewController: UIViewController {
     
     // Fast and slow audio 
     // This can be achieved also by using the AVAudioUnit effects. I left it like it is in the Udacity videos.
-    func playAudioWithVariableRate(rate: Float) {
+    func playAudioWithVariableRate(_ rate: Float) {
         
         stopAndResetAudio()
         
@@ -118,17 +118,17 @@ class PlaySoundsViewController: UIViewController {
     }
     
     // AVAudioUnit effects
-    func playAudioWithEffect(effect: AVAudioNode) {
+    func playAudioWithEffect(_ effect: AVAudioNode) {
         
         let audioPlayerNode = AVAudioPlayerNode()
-        audioEngine.attachNode(audioPlayerNode)
+        audioEngine.attach(audioPlayerNode)
         
-        audioEngine.attachNode(effect)
+        audioEngine.attach(effect)
         
         audioEngine.connect(audioPlayerNode, to: effect, format: nil)
         audioEngine.connect(effect, to: audioEngine.outputNode, format: nil)
         
-        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+        audioPlayerNode.scheduleFile(audioFile, at: nil, completionHandler: nil)
         try! audioEngine.start()
         
         audioPlayerNode.play()
