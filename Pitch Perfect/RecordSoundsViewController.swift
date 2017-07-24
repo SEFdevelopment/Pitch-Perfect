@@ -49,23 +49,10 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let session = AVAudioSession.sharedInstance()
         try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
         
-        // File path to the audio file
-        
-        /*
-        let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        let recordingName = "my_audio.wav"
-        let pathArray = [dirPath, recordingName]
-        
-        // let filePath = URL(withPathComponents: pathArray)
-        
-        // let filePath = URL.fileURL(withPathComponents: pathArray)
-        
-         */
- 
+        // Path to audio file
         let fileManager = FileManager.default
         let documentDirectoryUrl = try! fileManager.url(for:.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         let audioFileUrl = documentDirectoryUrl.appendingPathComponent("my_audio.wav")
-        
         
         // Initialize the recorder
         try! audioRecorder = AVAudioRecorder(url: audioFileUrl, settings: [:])
